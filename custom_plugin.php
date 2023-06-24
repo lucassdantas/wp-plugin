@@ -7,7 +7,15 @@
 * Author: Lucas Dantas 
 * Author URI: linkedin.com/in/lucas-de-sousa-dantas/
 **/
-function cp_custom_plugin(){
-    require_once './src/main';
+class Custom_plugin {
+
+    public static function init() {
+        add_filter( 'woocommerce_settings_tabs_array', __CLASS__ . '::add_settings_tab', 50 );
+    }
+
+    public static function add_settings_tab( $settings_tabs ) {
+        $settings_tabs['settings_tab_demo'] = __( 'Settings Demo Tab', 'woocommerce-settings-tab-demo' );
+        return $settings_tabs;
+    }
 }
-add_action('init', 'cp_custom_plugin');
+Custom_plugin::init();
